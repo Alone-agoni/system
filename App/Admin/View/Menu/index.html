@@ -1,0 +1,37 @@
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+            <li class="line">line</li>
+            <li><a class="add" href="{:U('Menu/create')}" target="dialog"><span>添加顶级菜单</span></a></li>
+            <li class="line">line</li>
+            <li><a class="delete" href="demo/common/ajaxDone.html?uid={sid_user}" target="ajaxTodo" title="确定要删除吗?"><span>删除选中菜单</span></a></li>
+            <li class="line">line</li>
+            <li><a class="edit" href="demo_page4.html?uid={sid_user}" target="navTab"><span>修改选中菜单</span></a></li>
+			<li class="line">line</li>
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="75">
+		<thead>
+			<tr>
+				<th width="80">菜单排序</th>
+				<th width="120">菜单名称</th>
+				<th>菜单连接</th>
+				<th width="200">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+            <foreach name="rows" item="vo">
+                <tr target="sid_user" rel="1">
+                    <td>{$vo.sort}</td>
+                    <td>{$vo.name}</td>
+                    <td>{$vo.mca}</td>
+                    <td><a href="{:U('Menu/create_sub',[pid=>$vo[id]])}" target="dialog">添加子菜单</a> </td>
+                </tr>
+            </foreach>
+		</tbody>
+	</table>
+    <div class="panelBar">
+
+
+    </div>
+</div>
