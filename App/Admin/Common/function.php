@@ -73,5 +73,5 @@ function tree_html($level,$num=4)
     $total = ($level-1)*$num;
     $string = '';
     for($i=0;$i<=$total;$i++) $string .= "&nbsp;";
-    return $total==0?$string:$string."|_";
+    return $total==0?$string:$string."|—";
 }
