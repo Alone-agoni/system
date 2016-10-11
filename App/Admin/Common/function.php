@@ -20,3 +20,58 @@ function system_info(){
     );
     return $Row;
 }
+
+/**
+ * 第一步，将数据转换成树形数组
+ * 无限极分类树型菜单
+ */
+function tree($data,$pid=0,$level=1)
+{
+    $tree = [];
+    foreach($data as $k=>$v)
+    {
+        if($v['pid'] == $pid)
+        {
+            $v['son'] = tree($data,$v['id'],$level+1);
+            if(empty($v['son'])) unset($v['son']);
+            $v['level'] = $level;//等级，后面格式化显示要用到
+            $tree[] = $v;
+        }
+    }
+    return $tree;
+}
+
+/**
+ * 第二步
+ * 树形菜单转二维数组
+ */
+function sort_tree($tree)
+{
+    static $item = [];
+    foreach($tree as $k=>$v)
+    {
+        $v['html'] = tree_html($v['level'],4);//计算格式化样式
+        if(isset($v['son']))
+        {
+            $son = $v['son'];
+            unset($v['son']);
+            $item[] = $v;
+            sort_tree($son);
+        }else{
+            $item[] = $v;
+        }
+    }
+    return $item;
+}
+
+/**
+ * 第三步
+ * 根据菜单等级计算&nbsp;的个数
+ */
+function tree_html($level,$num=4)
+{
+    $total = ($level-1)*$num;
+    $string = '';
+    for($i=0;$i<=$total;$i++) $string .= "&nbsp;";
+    return $total==0?$string:$string."|_";
+}

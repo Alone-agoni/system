@@ -19,14 +19,14 @@ class CommonController extends Controller{
      * callbackType如果是closeCurrent就会关闭当前tab
      * 只有callbackType="forward"时需要forwardUrl值
      */
-    public function dwz_success($msg='操作成功',$closeCurrent='closeCurrent',$navTabId='')
+    public function dwz_success($msg='操作成功',$closeCurrent='',$navTabId='')
     {
         $data = [
             'statusCode'   => 200,
             'message'      => $msg.'!!!',
             'navTabId'     => $navTabId,
             'forwardUrl'   => '',
-            'callbackType' => $closeCurrent,
+            'callbackType' => $closeCurrent==""?"closeCurrent":$closeCurrent,
         ];
         echo json_encode($data);die;
     }

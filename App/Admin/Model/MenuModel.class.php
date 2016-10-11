@@ -7,7 +7,7 @@ class MenuModel extends Model
 {
     public static function menus()
     {
-        $rows = M('Menu')->select();
+        $rows = M('Menu')->order('sort ASC,id ASC')->select();
         return $rows;
     }
 
@@ -19,5 +19,15 @@ class MenuModel extends Model
     public static function store($data)
     {
         return M('Menu')->add($data);
+    }
+
+    public static function destory($mid)
+    {
+        return M('Menu')->delete($mid);
+    }
+
+    public static function update($data)
+    {
+        return M('Menu')->save($data);
     }
 }
