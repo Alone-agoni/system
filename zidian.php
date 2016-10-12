@@ -6,7 +6,7 @@ header("Content-type:text/html;charset=utf-8");
 // 配置数据库
 $database = array();
 $database['DB_HOST'] = 'localhost';
-$database['DB_NAME'] = '20161011db';
+$database['DB_NAME'] = 'phpsystem';
 $database['DB_USER'] = 'root';
 $database['DB_PWD'] = '';
 $mysql_conn = @mysql_connect("{$database['DB_HOST']}", "{$database['DB_USER']}", "{$database['DB_PWD']}") or die("Mysql connect is error.");
