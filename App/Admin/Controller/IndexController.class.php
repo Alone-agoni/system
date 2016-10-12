@@ -28,6 +28,6 @@ class IndexController extends CommonController
     public function create_model()
     {
         create_model();
-        $this->dwz_success('创建成功');
+        $this->dwz_success('创建成功','1');
     }
 }
