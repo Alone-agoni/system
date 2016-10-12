@@ -24,12 +24,12 @@ function create_model()
             //将写文件
             if(file_put_contents($filepath,model_tpl($filename)))
             {
-                echo "<font color='green'>".$filename."Model写入成功...！！！</font><br>";
+                #echo "<font color='green'>".$filename."Model写入成功...！！！</font><br>";
             }else{
-                echo "<font color='red'>".$filename."Model写入失败...！！！</font><br>";
+                #echo "<font color='red'>".$filename."Model写入失败...！！！</font><br>";
             }
         }else{
-            echo "<font color='blue'>".$filename."Model已经存在...！！！</font><br>";
+            #echo "<font color='blue'>".$filename."Model已经存在...！！！</font><br>";
         }
     }
 }

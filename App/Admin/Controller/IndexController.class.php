@@ -23,4 +23,11 @@ class IndexController extends CommonController
             $this->display();
         }
     }
+
+    /*自动生成模型*/
+    public function create_model()
+    {
+        create_model();
+        $this->dwz_success('创建成功');
+    }
 }
