@@ -1,7 +1,7 @@
 <?php
 namespace Admin\Controller;
 
-use Admin\Model\UserModel;
+use Common\Model\UserModel;
 use Think\Controller;
 
 class UserController extends CommonController
@@ -16,7 +16,7 @@ class UserController extends CommonController
         $uid = session('uid');
         $pwd = I('pwd');
         $password = I('password');
-        $row = UserModel::get_row_by_id($uid);
+        $row = UserModel::row_byid($uid);
         if($row['password'] != md5($pwd))
         {
             $this->dwz_error('原始密码错误');

@@ -1,8 +1,8 @@
 <?php
 namespace Admin\Controller;
 
-use Admin\Model\LogModel;
-use Admin\Model\UserModel;
+use Common\Model\LogModel;
+use Common\Model\UserModel;
 use Think\Controller;
 
 class LoginController extends Controller
@@ -21,7 +21,7 @@ class LoginController extends Controller
         $username = I('u');
         $password = I('p');
         //根据用户名查询数据
-        $row = UserModel::get_row_by_username($username);
+        $row = UserModel::row_bywhere("username='$username'");
         //返回登录失败提示
         if(empty($row)){
             $this->ajaxReturn(['status'=>0,'msg'=>'账号或密码错误!!!']);die;

@@ -1,14 +1,14 @@
 <?php
 namespace Admin\Controller;
 
-use Admin\Model\MenuModel;
+use Common\Model\MenuModel;
 use Think\Controller;
 
 class MenuController extends CommonController
 {
     public function index()
     {
-        $rows = MenuModel::menus();
+        $rows = MenuModel::rows(1,"*","sort ASC,id ASC");
         $tree = tree($rows);
         $item = sort_tree($tree);
         $this->assign('rows',$item);
@@ -37,7 +37,7 @@ class MenuController extends CommonController
 
     public function create_sub($pid)
     {
-        $row = MenuModel::get_menu_by_id($pid);
+        $row = MenuModel::row_byid($pid);
         $this->assign('row',$row);
         $this->display();
     }
@@ -60,6 +60,11 @@ class MenuController extends CommonController
 
     public function destory($mid)
     {
+        $row = MenuModel::row_bywhere("pid=$mid");
+        if(!empty($row))
+        {
+            $this->dwz_error('该菜单还有子菜单，请先删除子菜单');die;
+        }
         if(MenuModel::destory($mid))
         {
             $this->dwz_success('删除菜单成功','1','menu_index');
@@ -70,7 +75,7 @@ class MenuController extends CommonController
 
     public function edit($mid)
     {
-        $row = MenuModel::get_menu_by_id($mid);
+        $row = MenuModel::row_byid($mid);
         $this->assign('row',$row);
         $this->display();
     }
