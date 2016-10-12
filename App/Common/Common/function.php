@@ -95,3 +95,70 @@ function model_tpl($tablenames)
     $content .= "}";
     return $content;
 }
+
+/**
+ * 快速生成controller
+ */
+function create_controller($cname)
+{
+    $filename = $cname."Controller.class.php";
+    $pathname = MODULE_PATH."Controller/".$filename;
+    if(!file_exists($pathname))
+    {
+        file_put_contents($pathname,controller_tpl($cname));
+    }else{
+        echo $filename."已经存在...!!!";
+    }
+}
+
+/**
+ * 快速生成controller模板
+ */
+function controller_tpl($cname)
+{
+    $content = "";
+    $content .= "<?php\r\n";
+    $content .= "namespace Admin\\Controller;\r\n\r\n";
+    $content .= "use Think\\Controller;\r\n\r\n";
+    $content .= "class {$cname}Controller extends CommonController\r\n";
+    $content .= "{\r\n";
+    /*index方法*/
+    $content .= "    /*列表视图*/\r\n";
+    $content .= "    public function index()\r\n";
+    $content .= "    {\r\n";
+    $content .= "        \$this->display();\r\n";
+    $content .= "    }\r\n";
+    /*create方法*/
+    $content .= "    /*添加视图*/\r\n";
+    $content .= "    public function create()\r\n";
+    $content .= "    {\r\n";
+    $content .= "        \$this->display();\r\n";
+    $content .= "    }\r\n";
+    /*store方法*/
+    $content .= "    /*添加动作*/\r\n";
+    $content .= "    public function store()\r\n";
+    $content .= "    {\r\n";
+    $content .= "        \$data = [\r\n\r\n";
+    $content .= "        ];\r\n";
+    $content .= "    }\r\n";
+    /*edit方法*/
+    $content .= "    /*修改视图*/\r\n";
+    $content .= "    public function edit(\$id)\r\n";
+    $content .= "    {\r\n";
+    $content .= "        \$this->display();\r\n";
+    $content .= "    }\r\n";
+    /*update方法*/
+    $content .= "    /*修改动作*/\r\n";
+    $content .= "    public function update()\r\n";
+    $content .= "    {\r\n";
+    $content .= "        \$data = [\r\n\r\n";
+    $content .= "        ];\r\n";
+    $content .= "    }\r\n";
+    /*destory方法*/
+    $content .= "    /*修改视图*/\r\n";
+    $content .= "    public function destory(\$id)\r\n";
+    $content .= "    {\r\n\r\n";
+    $content .= "    }\r\n";
+    $content .= "}";
+    return $content;
+}
