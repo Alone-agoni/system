@@ -1,0 +1,35 @@
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li class="line">line</li>
+            <li><a class="add" href="{:U('AuthGroup/create')}" target="dialog"><span>添加用户组</span></a></li>
+            <li class="line">line</li>
+            <li><a class="delete" href="{:U('AuthGroup/destory')}/id/{sid_user}" target="ajaxTodo" title="确定要删除吗?"><span>删除选中用户组</span></a></li>
+            <li class="line">line</li>
+            <li><a class="edit" href="{:U('AuthGroup/edit')}/id/{sid_user}" target="dialog"><span>修改选中用户组</span></a></li>
+            <li class="line">line</li>
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="75">
+        <thead>
+        <tr>
+            <th width="80">ID号</th>
+            <th width="120">用户组名</th>
+            <th width="200">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <foreach name="rows" item="vo">
+            <tr target="sid_user" rel="{$vo.id}">
+                <td>{$vo.id}</td>
+                <td>{$vo.title}</td>
+                <td><a href="{:U('AuthGroup/access',[pid=>$vo[id]])}" target="dialog">分配权限</a> </td>
+            </tr>
+        </foreach>
+        </tbody>
+    </table>
+    <div class="panelBar">
+
+
+    </div>
+</div>

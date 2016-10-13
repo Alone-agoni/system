@@ -29,7 +29,7 @@ class MenuController extends CommonController
         ];
         if(MenuModel::store($data))
         {
-            $this->dwz_success('添加顶级菜单成功','','menu_index');
+            $this->dwz_success('添加顶级菜单成功','','Menu_index');
         }else{
             $this->dwz_error('添加顶级菜单失败');
         }
@@ -52,7 +52,7 @@ class MenuController extends CommonController
         ];
         if(MenuModel::store($data))
         {
-            $this->dwz_success('添加子级菜单成功','','menu_index');
+            $this->dwz_success('添加子级菜单成功','','Menu_index');
         }else{
             $this->dwz_error('添加子级菜单失败');
         }
@@ -67,7 +67,7 @@ class MenuController extends CommonController
         }
         if(MenuModel::destory($mid))
         {
-            $this->dwz_success('删除菜单成功','1','menu_index');
+            $this->dwz_success('删除菜单成功','1','Menu_index');
         }else{
             $this->dwz_error('删除菜单失败');
         }
@@ -90,7 +90,7 @@ class MenuController extends CommonController
         ];
         if(MenuModel::update($data) !== false)
         {
-            $this->dwz_success('修改菜单成功','','menu_index');
+            $this->dwz_success('修改菜单成功','','Menu_index');
         }else{
             $this->dwz_error('修改菜单失败');
         }
