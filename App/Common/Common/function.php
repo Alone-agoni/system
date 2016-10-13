@@ -119,6 +119,7 @@ function controller_tpl($cname)
     $content = "";
     $content .= "<?php\r\n";
     $content .= "namespace Admin\\Controller;\r\n\r\n";
+    $content .= "use Common\\Model\\{$cname}Model;\r\n";
     $content .= "use Think\\Controller;\r\n\r\n";
     $content .= "class {$cname}Controller extends CommonController\r\n";
     $content .= "{\r\n";
@@ -126,38 +127,60 @@ function controller_tpl($cname)
     $content .= "    /*列表视图*/\r\n";
     $content .= "    public function index()\r\n";
     $content .= "    {\r\n";
+    $content .= "        \$rows = {$cname}Model::rows();\r\n";
+    $content .= "        \$this->assign('rows',\$rows);\r\n";
     $content .= "        \$this->display();\r\n";
-    $content .= "    }\r\n";
+    $content .= "    }\r\n\r\n";
     /*create方法*/
     $content .= "    /*添加视图*/\r\n";
     $content .= "    public function create()\r\n";
     $content .= "    {\r\n";
     $content .= "        \$this->display();\r\n";
-    $content .= "    }\r\n";
+    $content .= "    }\r\n\r\n";
     /*store方法*/
     $content .= "    /*添加动作*/\r\n";
     $content .= "    public function store()\r\n";
     $content .= "    {\r\n";
     $content .= "        \$data = [\r\n\r\n";
     $content .= "        ];\r\n";
-    $content .= "    }\r\n";
+    $content .= "        if({$cname}Model::store(\$data))\r\n";
+    $content .= "        {\r\n";
+    $content .= "            \$this->success('添加成功!!!');\r\n";
+    $content .= "        }else{\r\n";
+    $content .= "            \$this->error('添加失败!!!');\r\n";
+    $content .= "        }\r\n";
+    $content .= "    }\r\n\r\n";
     /*edit方法*/
     $content .= "    /*修改视图*/\r\n";
     $content .= "    public function edit(\$id)\r\n";
     $content .= "    {\r\n";
+    $content .= "        \$row = {$cname}Model::row_byid(\$id);\r\n";
+    $content .= "        \$this->assign('row',\$row);\r\n";
     $content .= "        \$this->display();\r\n";
-    $content .= "    }\r\n";
+    $content .= "    }\r\n\r\n";
     /*update方法*/
     $content .= "    /*修改动作*/\r\n";
     $content .= "    public function update()\r\n";
     $content .= "    {\r\n";
     $content .= "        \$data = [\r\n\r\n";
     $content .= "        ];\r\n";
-    $content .= "    }\r\n";
+    $content .= "        if({$cname}Model::update(\$data) !== false)\r\n";
+    $content .= "        {\r\n";
+    $content .= "            \$this->success('修改成功!!!');\r\n";
+    $content .= "        }else{\r\n";
+    $content .= "            \$this->error('修改失败!!!');\r\n";
+    $content .= "        }\r\n";
+    $content .= "    }\r\n\r\n";
     /*destory方法*/
-    $content .= "    /*修改视图*/\r\n";
+    $content .= "    /*删除动作*/\r\n";
     $content .= "    public function destory(\$id)\r\n";
-    $content .= "    {\r\n\r\n";
+    $content .= "    {\r\n";
+    $content .= "        if({$cname}Model::destory(\$id))\r\n";
+    $content .= "        {\r\n";
+    $content .= "             \$this->success('删除成功!!!');\r\n";
+    $content .= "        }else{\r\n";
+    $content .= "             \$this->error('删除失败!!!');\r\n";
+    $content .= "        }\r\n";
     $content .= "    }\r\n";
     $content .= "}";
     return $content;
