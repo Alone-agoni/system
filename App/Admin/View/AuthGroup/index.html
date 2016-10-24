@@ -1,13 +1,19 @@
 <div class="pageContent">
     <div class="panelBar">
         <ul class="toolBar">
-            <li class="line">line</li>
-            <li><a class="add" href="{:U('AuthGroup/create')}" target="dialog"><span>添加用户组</span></a></li>
-            <li class="line">line</li>
-            <li><a class="delete" href="{:U('AuthGroup/destory')}/id/{sid_user}" target="ajaxTodo" title="确定要删除吗?"><span>删除选中用户组</span></a></li>
-            <li class="line">line</li>
-            <li><a class="edit" href="{:U('AuthGroup/edit')}/id/{sid_user}" target="dialog"><span>修改选中用户组</span></a></li>
-            <li class="line">line</li>
+            <if condition="check_user_rule('AuthGroup/create')">
+                <li class="line">line</li>
+                <li><a class="add" href="{:U('AuthGroup/create')}" target="dialog"><span>添加用户组</span></a></li>
+            </if>
+            <if condition="check_user_rule('AuthGroup/destory')">
+                <li class="line">line</li>
+                <li><a class="delete" href="{:U('AuthGroup/destory')}/id/{sid_user}" target="ajaxTodo" title="确定要删除吗?"><span>删除选中用户组</span></a></li>
+            </if>
+            <if condition="check_user_rule('AuthGroup/edit')">
+                <li class="line">line</li>
+                <li><a class="edit" href="{:U('AuthGroup/edit')}/id/{sid_user}" target="dialog"><span>修改选中用户组</span></a></li>
+                <li class="line">line</li>
+            </if>
         </ul>
     </div>
     <table class="table" width="100%" layoutH="75">
@@ -23,7 +29,11 @@
             <tr target="sid_user" rel="{$vo.id}">
                 <td>{$vo.id}</td>
                 <td>{$vo.title}</td>
-                <td><a href="{:U('AuthGroup/access',[pid=>$vo[id]])}" target="dialog">分配权限</a> </td>
+                <td>
+                    <if condition="check_user_rule('AuthGroup/access')">
+                        <a href="{:U('AuthGroup/access',[group_id=>$vo[id]])}" target="navTab">分配权限</a>
+                    </if>
+                </td>
             </tr>
         </foreach>
         </tbody>

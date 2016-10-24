@@ -21,6 +21,7 @@ class UserModel extends Model{
     public static function row_byid($id,$field="*")
     {
         $row = M(self::$table)->field($field)->find($id);
+        $row['group'] = AuthGroupAccessModel::row_bywhere("uid=$id");
         return $row;
     }
 
@@ -32,20 +33,81 @@ class UserModel extends Model{
     }
 
     /*添加一条数据*/
-    public static function store($data)
+    public static function store($data,$group)
     {
-        return M(self::$table)->add($data);
+        M(self::$table)->startTrans();//开启事物
+        $uid = M(self::$table)->add($data);//添加用户
+        $data = [];
+        foreach($group as $key=>$val)
+        {
+            $data[] = [
+                'uid' => $uid,
+                'group_id' => $val,
+            ];
+        }
+        $result = AuthGroupAccessModel::store($data);//添加用户所属组
+        if($uid && $result)
+        {
+            M(self::$table)->commit();//提交事物
+            return true;
+        }else{
+            M(self::$table)->rollback();//回滚
+        }
     }
 
     /*修改一条数据*/
-    public static function update($data)
+    public static function update($data,$group)
     {
-        return M(self::$table)->save($data);
+        M(self::$table)->save($data);
+        AuthGroupAccessModel::destory($data['id']);
+        $item = [];
+        foreach($group as $key=>$val)
+        {
+            $item[] = [
+                'uid' => $data['id'],
+                'group_id' => $val,
+            ];
+        }
+        AuthGroupAccessModel::store($item);//添加用户所属组
+        return true;
+    }
+
+    /*修改用户登录信息*/
+    public static function update_login($data)
+    {
+        M(self::$table)->save($data);
     }
 
     /*删除一条数据*/
     public static function destory($id)
     {
-        return M(self::$table)->delete($id);
+        M(self::$table)->startTrans();//开启事物
+        $result1 = M(self::$table)->delete($id);
+        $result2 = AuthGroupAccessModel::destory($id);
+        if($result1 && $result2)
+        {
+            M(self::$table)->commit();//提交事物
+            return true;
+        }else{
+            M(self::$table)->rollback();//回滚
+        }
+    }
+
+    /*查询用户列表，查询用户所属组*/
+    public static function users_group()
+    {
+        $rows = self::rows();//用户列表
+        foreach($rows as $key=>$val)
+        {
+            $items = AuthGroupAccessModel::rows_bywhere('uid='.$val['id']);//用户所属组
+            $string = '';
+            foreach($items as $k=>$v)
+            {
+                $title = AuthGroupModel::row_bywhere("id=".$v['group_id'],'title');//组名
+                $string .= $title['title'].'、';
+            }
+            $rows[$key]['title'] = trim($string,'、');
+        }
+        return $rows;
     }
 }

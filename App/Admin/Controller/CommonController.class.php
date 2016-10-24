@@ -6,11 +6,16 @@ class CommonController extends Controller{
     public function _initialize()
     {
         header("Content-type:text/html;charset=utf-8");
-        //session('uid',null);
         $uid = session('uid');
         if(empty($uid) || !isset($uid))
         {
             $this->redirect("Login/index");
+        }
+        $auth=new \Think\Auth();
+        $rule_name=MODULE_NAME.'/'.CONTROLLER_NAME.'/'.ACTION_NAME;
+        $result=$auth->check($rule_name,$uid);
+        if(!$result){
+            $this->dwz_error('您没有权限访问');
         }
     }
 

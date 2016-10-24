@@ -75,3 +75,13 @@ function tree_html($level,$num=4)
     for($i=0;$i<=$total;$i++) $string .= "&nbsp;";
     return $total==0?$string:$string."|—";
 }
+
+/**
+ * 检查按钮权限
+ */
+function check_user_rule($param)
+{
+    $auth =new \Think\Auth();
+    $rule_name = 'Admin/'.$param;
+    return $result = $auth->check($rule_name,session('uid'));
+}

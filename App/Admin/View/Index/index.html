@@ -242,7 +242,21 @@ $(function(){
 						</ul>
 					</div>
 					-->
-                    <div class="accordionHeader">
+                    <foreach name="Tree" item="vo">
+                        <div class="accordionHeader">
+                            <h2><span>Folder</span>{$vo.name}</h2>
+                        </div>
+                        <if condition="$vo.son">
+                            <div class="accordionContent">
+                                <ul class="tree">
+                                    <foreach name="vo.son" item="v">
+                                        <li><a href="__ROOT__/{$v.mca}" target="navTab" rel="{$v.rel}">{$v.name}</a></li>
+                                    </foreach>
+                                </ul>
+                            </div>
+                        </if>
+                    </foreach>
+                    <!--<div class="accordionHeader">
                         <h2><span>Folder</span>系统设置</h2>
                     </div>
                     <div class="accordionContent">
@@ -255,7 +269,7 @@ $(function(){
                     </div>
                     <div class="accordionContent">
                         <ul class="tree">
-                            <li><a href="{:U('Access/index')}" target="navTab" rel="access_index">权限管理</a></li>
+                            <li><a href="{:U('AuthRule/index')}" target="navTab" rel="AuthRule_index">权限管理</a></li>
                             <li><a href="{:U('AuthGroup/index')}" target="navTab" rel="AuthGroup_index">用户组管理</a></li>
                             <li><a href="{:U('User/index')}" target="navTab" rel="User_index">管理员列表</a></li>
                         </ul>
@@ -267,7 +281,7 @@ $(function(){
                         <ul class="tree">
                             <li><a href="{:U('Article/index')}" target="navTab" rel="article_index">文章列表</a></li>
                         </ul>
-                    </div>
+                    </div>-->
 				</div>
 			</div>
 		</div>

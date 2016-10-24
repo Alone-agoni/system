@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        table{border: 1px solid #ddd;width: 100%; border-collapse: collapse;}
+        table td{padding:5px;border: 1px solid #ddd;}
+        table .td_right{text-align: right; width: 20%;}
+    </style>
+</head>
+<body>
+<div class="pageContent">
+    <form method="post" action="{:U('User/update')}" class="pageForm required-validate" onsubmit="return validateCallback(this,dialogAjaxDone)">
+        <div class="pageFormContent nowrap" layoutH="60">
+            <table>
+                <tr>
+                    <td class="td_right">用&nbsp; 户&nbsp; 组：</td>
+                    <td>
+                        <foreach name="rows" item="vo">
+                            <label style="width: 80px;"><input type="checkbox" name="group_id[]" value="{$vo.id}" <in name="vo['id']" value="$row[group]"> checked="checked" </in>/>{$vo.title}</label>
+                        </foreach>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td_right">用户名称：</td>
+                    <td><input type="text" value="{$row.username}" name="username" class="required"/></td>
+                </tr>
+                <tr>
+                    <td class="td_right">初始密码：</td>
+                    <td><input type="password" name="password"/><span class="info">&nbsp;如不改密码；留空即可</span></td>
+                </tr>
+                <tr>
+                    <td class="td_right">状　　态：</td>
+                    <td>
+                        <label style="width: 70px;"><input type="radio" name="status" value="1" <if condition="$row[status] eq 1">checked</if>/>允许登录</label>
+                        <label style="width: 70px;"><input type="radio" name="status" value="0" <if condition="$row[status] eq 0">checked</if>/>禁止登录</label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="formBar">
+            <input type="hidden" name="id" value="{$row.id}">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+</div>
+</body>
+</html>

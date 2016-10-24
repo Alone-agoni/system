@@ -1,0 +1,45 @@
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+            <if condition="check_user_rule('AuthRule/create')">
+                <li class="line">line</li>
+                <li><a class="add" href="{:U('AuthRule/create')}" target="dialog"><span>添加顶级权限</span></a></li>
+            </if>
+            <if condition="check_user_rule('AuthRule/destory')">
+                <li class="line">line</li>
+                <li><a class="delete" href="{:U('AuthRule/destory')}/id/{sid_user}" target="ajaxTodo" title="确定要删除吗?"><span>删除选中权限</span></a></li>
+            </if>
+            <if condition="check_user_rule('AuthRule/edit')">
+                <li class="line">line</li>
+                <li><a class="edit" href="{:U('AuthRule/edit')}/id/{sid_user}" target="dialog"><span>修改选中权限</span></a></li>
+                <li class="line">line</li>
+            </if>
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="75">
+		<thead>
+			<tr>
+				<th>权限名称</th>
+				<th>权限</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+            <foreach name="rows" item="vo">
+                <tr target="sid_user" rel="{$vo.id}">
+                    <td>{$vo.html}{$vo.title}</td>
+                    <td>{$vo.name}</td>
+                    <td>
+                        <if condition="check_user_rule('AuthRule/create_sub')">
+                            <a href="{:U('AuthRule/create_sub',[pid=>$vo[id]])}" target="dialog">添加子权限</a>
+                        </if>
+                    </td>
+                </tr>
+            </foreach>
+		</tbody>
+	</table>
+    <div class="panelBar">
+
+
+    </div>
+</div>

@@ -11,9 +11,10 @@ class UserController extends CommonController
     /*列表视图*/
     public function index()
     {
-        $rows = UserModel::rows();
+        $rows = UserModel::users_group();
         $this->assign('rows',$rows);
         $this->display();
+
     }
 
     /*添加视图*/
@@ -30,12 +31,12 @@ class UserController extends CommonController
     {
         $data = [
             'username' => I('username'),
-            'password' => I('password'),
+            'password' => md5(I('password')),
             'status'   => I('status'),
             'status'   => I('status'),
         ];
         $group = I('group_id');
-        $uid = UserModel::store($data);
+        $uid = UserModel::store($data,$group);
         if($uid)
         {
             foreach($group as $key=>$val)
@@ -55,8 +56,13 @@ class UserController extends CommonController
     /*修改视图*/
     public function edit($id)
     {
-        $row = UserModel::row_byid($id);
-        $this->assign('row',$row);
+        $row  = UserModel::row_byid($id);//查询用户及用户所属组
+        $rows = AuthGroupModel::rows();//查询用户组
+        $assign = [
+            'row' => $row,
+            'rows' => $rows,
+        ];
+        $this->assign($assign);
         $this->display();
     }
 
@@ -64,13 +70,20 @@ class UserController extends CommonController
     public function update()
     {
         $data = [
-
+            'id'       => I('id'),
+            'username' => I('username'),
+            'status'   => I('status'),
         ];
-        if(UserModel::update($data) !== false)
+        if(!empty(I('password')))
         {
-            $this->success('修改成功!!!');
+            $data['password'] = md5(I('password'));
+        }
+        $group = I('group_id');
+        if(UserModel::update($data,$group))
+        {
+            $this->dwz_success('修改管理成功!!!','','User_index');
         }else{
-            $this->error('修改失败!!!');
+            $this->dwz_error('修改管理失败!!!');
         }
     }
 

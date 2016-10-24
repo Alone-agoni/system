@@ -4,9 +4,9 @@ namespace Common\Model;
 
 use Think\Model;
 
-class AuthGroupAccessModel extends Model{
+class AuthRuleModel extends Model{
     /*定义静态成员属性*/
-    public static $table = "AuthGroupAccess" ;//表名
+    public static $table = "AuthRule" ;//表名
 
     /*定义静态成员方法*/
 
@@ -31,17 +31,10 @@ class AuthGroupAccessModel extends Model{
         return $row;
     }
 
-    /*通过条件获取多条数据*/
-    public static function rows_bywhere($where="1",$field="*")
-    {
-        $rows = M(self::$table)->where($where)->field($field)->select();
-        return $rows;
-    }
-
     /*添加一条数据*/
     public static function store($data)
     {
-        return M(self::$table)->addAll($data);
+        return M(self::$table)->add($data);
     }
 
     /*修改一条数据*/
@@ -53,6 +46,6 @@ class AuthGroupAccessModel extends Model{
     /*删除一条数据*/
     public static function destory($id)
     {
-        return M(self::$table)->where("uid=$id")->delete();
+        return M(self::$table)->delete($id);
     }
 }

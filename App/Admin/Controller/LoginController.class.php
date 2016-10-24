@@ -42,7 +42,7 @@ class LoginController extends Controller
             'logintime' => time(),
             'login_ip' => get_client_ip()
         ];
-        UserModel::update($data);
+        UserModel::update_login($data);
         //添加用户登录日志
         $log = [
             'userid'=> $row['id'],

@@ -1,13 +1,19 @@
 <div class="pageContent">
 	<div class="panelBar">
 		<ul class="toolBar">
+            <if condition="check_user_rule('Menu/create')">
+                <li class="line">line</li>
+                <li><a class="add" href="{:U('Menu/create')}" target="dialog"><span>添加顶级菜单</span></a></li>
+            </if>
+            <if condition="check_user_rule('Menu/destory')">
+                <li class="line">line</li>
+                <li><a class="delete" href="{:U('Menu/destory')}/mid/{sid_user}" target="ajaxTodo" title="确定要删除吗?"><span>删除选中菜单</span></a></li>
+            </if>
+            <if condition="check_user_rule('Menu/edit')">
+                <li class="line">line</li>
+                <li><a class="edit" href="{:U('Menu/edit')}/mid/{sid_user}" target="dialog"><span>修改选中菜单</span></a></li>
+            </if>
             <li class="line">line</li>
-            <li><a class="add" href="{:U('Menu/create')}" target="dialog"><span>添加顶级菜单</span></a></li>
-            <li class="line">line</li>
-            <li><a class="delete" href="{:U('Menu/destory')}/mid/{sid_user}" target="ajaxTodo" title="确定要删除吗?"><span>删除选中菜单</span></a></li>
-            <li class="line">line</li>
-            <li><a class="edit" href="{:U('Menu/edit')}/mid/{sid_user}" target="dialog"><span>修改选中菜单</span></a></li>
-			<li class="line">line</li>
 		</ul>
 	</div>
 	<table class="table" width="100%" layoutH="75">
@@ -25,7 +31,11 @@
                     <td>{$vo.sort}</td>
                     <td>{$vo.html}{$vo.name}</td>
                     <td>{$vo.mca}</td>
-                    <td><a href="{:U('Menu/create_sub',[pid=>$vo[id]])}" target="dialog">添加子菜单</a> </td>
+                    <td>
+                        <if condition="check_user_rule('Menu/create_sub')">
+                            <a href="{:U('Menu/create_sub',[pid=>$vo[id]])}" target="dialog">添加子菜单</a>
+                        </if>
+                    </td>
                 </tr>
             </foreach>
 		</tbody>

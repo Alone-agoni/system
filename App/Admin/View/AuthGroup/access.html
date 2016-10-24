@@ -1,0 +1,56 @@
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+
+        </ul>
+    </div>
+    <form method="post" action="{:U('AuthGroup/access_store')}" onsubmit="return validateCallback(this)">
+        <table class="list" width="100%" layoutH="65">
+            <thead>
+                <tr>
+                    <th colspan="2" align="center" style="font-size: 18px;padding: 5px;">为<span style="color: red;font-size: 18px;">{$title}</span>分配权限</th>
+                </tr>
+            </thead>
+            <tbody>
+                <foreach name="rows" item="val">
+                    <tr>
+                        <td style="width: 10%;"><input class="input_rule" name="rule_ids[]" value="{$val.id}" type="checkbox" <in name="val['id']" value="$rules"> checked="checked" </in>>{$val.title}</td>
+                        <td>
+                            <if condition="$val.son">
+                                <foreach name="val['son']" item="va">
+                                    <table class="list" width="100%" style="margin: 10px 0;">
+                                        <tr>
+                                            <td style="width: 10%;"><input class="input_rule" name="rule_ids[]" value="{$va.id}" type="checkbox" <in name="va['id']" value="$rules"> checked="checked" </in>>{$va.title}</td>
+                                            <td>
+                                                <if condition="$va['son']">
+                                                    <foreach name="va['son']" item="v">
+                                                        <input name="rule_ids[]" value="{$v.id}" type="checkbox" <in name="v['id']" value="$rules"> checked="checked" </in>>{$v.title}&nbsp;&nbsp;&nbsp;
+                                                    </foreach>
+                                                </if>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </foreach>
+                            </if>
+                        </td>
+                    </tr>
+                </foreach>
+            </tbody>
+        </table>
+        <div class="formBar">
+            <input type="hidden" name="group_id" value="{$group_id}"/>
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $(function(){
+        $('.input_rule').click(function(){
+            var check = $(this).prop('checked');
+            $(this).parent().siblings().find("input[type='checkbox']").prop('checked',check);
+        });
+    });
+</script>
