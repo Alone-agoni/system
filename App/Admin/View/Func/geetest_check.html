@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        table{border: 1px solid #ddd;width: 100%; border-collapse: collapse;}
+        table td{padding:5px;border: 1px solid #ddd;}
+        table .td_right{text-align: right; width: 20%;}
+    </style>
+</head>
+<body>
+<div class="pageContent">
+    <form method="post" action="{:U('Func/geetest_submit_check')}" class="pageForm required-validate" onsubmit="return validateCallback(this)">
+        <div class="pageFormContent nowrap" layoutH="60">
+            <table>
+                <tr>
+                    <td class="td_right">用户名：</td>
+                    <td><input type="text" name="name" class="required"/></td>
+                </tr>
+                <tr>
+                    <td class="td_right">密　码：</td>
+                    <td><input type="password" name="password" class="required"/></td>
+                </tr>
+                <tr>
+                    <td class="td_right" style="height: 200px;">验证码：</td>
+                    <td><div id="captcha"></div></td>
+                </tr>
+            </table>
+        </div>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+</div>
+<script src="http://static.geetest.com/static/tools/gt.js"></script>
+<webuploaderjs />
+<script>
+    var handler = function (captchaObj) {
+        // 将验证码加到id为captcha的元素里
+        captchaObj.appendTo("#captcha");
+    };
+    // 获取验证码
+    $.get("{:U('Func/geetest_show_verify')}", function(data) {
+        // 使用initGeetest接口
+        // 参数1：配置参数，与创建Geetest实例时接受的参数一致
+        // 参数2：回调，回调的第一个参数验证码对象，之后可以使用它做appendTo之类的事件
+        initGeetest({
+            gt: data.gt,
+            challenge: data.challenge,
+            product: "float", // 产品形式
+            offline: !data.success
+        }, handler);
+    },'json');
+</script>
+</body>
+</html>

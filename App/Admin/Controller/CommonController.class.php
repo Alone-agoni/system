@@ -11,12 +11,26 @@ class CommonController extends Controller{
         {
             $this->redirect("Login/index");
         }
-        $auth=new \Think\Auth();
-        $rule_name=MODULE_NAME.'/'.CONTROLLER_NAME.'/'.ACTION_NAME;
-        $result=$auth->check($rule_name,$uid);
-        if(!$result){
-            $this->dwz_error('您没有权限访问');
+        $auth = new \Think\Auth();
+        $rule_name = MODULE_NAME.'/'.CONTROLLER_NAME.'/'.ACTION_NAME;
+        $no_auth = $this->no_auth();
+        if(!in_array($rule_name,$no_auth))
+        {
+            $result=$auth->check($rule_name,$uid);
+            if(!$result){
+                $this->dwz_error('您没有权限访问');
+            }
         }
+    }
+
+    /*无需验证方法*/
+    public function no_auth()
+    {
+        $item = [
+            'Admin/Func/geetest_show_verify',
+            'Admin/Func/geetest_submit_check',
+        ];
+        return $item;
     }
 
     /**

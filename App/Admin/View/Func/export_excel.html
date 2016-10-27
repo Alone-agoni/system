@@ -1,0 +1,54 @@
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <if condition="check_user_rule('Func/export_xls')">
+                <li class="line">line</li>
+                <li><a class="icon" href="{:U('Func/export_xls')}"><span>导出Excel</span></a></li>
+                <li class="line">line</li>
+            </if>
+            <if condition="check_user_rule('Func/export_csv')">
+                <li class="line">line</li>
+                <li><a class="icon" href="{:U('Func/export_csv')}"><span>导出Csv</span></a></li>
+                <li class="line">line</li>
+            </if>
+            <if condition="check_user_rule('Func/import_xls')">
+                <li class="line">line</li>
+                <li><a class="icon" href="{:U('Func/import_xls')}" target="navTab" rel="Func_import_xls"><span>导入Excel</span></a></li>
+                <li class="line">line</li>
+            </if>
+            <if condition="check_user_rule('Func/import_csv')">
+                <li class="line">line</li>
+                <li><a class="icon" href="{:U('Func/import_csv')}" target="navTab" rel="Func_import_csv"><span>导入Csv</span></a></li>
+                <li class="line">line</li>
+            </if>
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="75">
+        <thead>
+        <tr>
+            <th width="120">ID号</th>
+            <th>管理员名</th>
+            <th>密码</th>
+            <th>状态</th>
+            <th>登录时间</th>
+            <th>登录IP</th>
+        </tr>
+        </thead>
+        <tbody>
+        <foreach name="rows" item="vo">
+            <tr target="sid_user" rel="{$vo.id}">
+                <td>{$vo.id}</td>
+                <td>{$vo.username}</td>
+                <td>{$vo.password}</td>
+                <td>{$vo.status}</td>
+                <td>{$vo.logintime}</td>
+                <td>{$vo.loginip}</td>
+            </tr>
+        </foreach>
+        </tbody>
+    </table>
+    <div class="panelBar">
+
+
+    </div>
+</div>

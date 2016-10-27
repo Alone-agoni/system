@@ -1,0 +1,35 @@
+#box{border:1px solid #333333;width: 800px;height: 600px;margin: 0 auto;}
+#box_top{background: #00ccc0 none repeat scroll 0 0;height: 60px;}
+#box_top_l{text-align:center;line-height:60px;float: left;width: 20%;}
+#box_top_r{text-align:center;line-height:60px;float: right;width: 80%;}
+#my_face{border: 1px solid #ddd;width: 40px;height: 40px;margin-top: 10px;margin-left: 10px;border-radius: 40px;float: left;}
+#my_face img{width: 100%;border-radius: 40px;float: left;}
+.clear_float{clear: both;}
+
+#box_main_l{border-right: 1px solid #333333;width: 30%;height: 540px; float: left;}
+#box_main_l h4{background: #999999;text-align: center;margin:0px;padding:10px;color: #ffffff;border-bottom: 1px solid #333;}
+#totalunreadcount{width:30px;height:30px;background: red;display: inline-block;line-height: 30px;border-radius: 30px;margin-left: 10px;}
+#box_main_r{border-left: 1px solid #333333;float: right;width: 69%; height: 540px;}
+
+#friend_list{font-size: 12px;}
+.fl-one{border-bottom: 1px solid #333;height: 60px;background: #999999}
+.fl_one_face{width: 40px;height: 40px; float: left;margin-top: 10px;margin-left: 10px;}
+.fl_one_face img{width: 100%;border-radius: 40px;}
+.fl_one_name{float: left;line-height: 60px;margin-left: 10px;}
+.fl_one_count{float: right;width:30px;height:30px;line-height:30px;text-align:center;margin-right: 10px;background: red;color: #ffffff;border-radius: 30px;margin-top: 15px;}
+.fl-one-selected{background: #ffffff;}
+
+#message_box{height: 460px;width: 100%;overflow-y:auto;}
+#message_area{height: 40px;width: 100%;}
+#message_area input{border: 1px solid #999999; height: 30px;width: 99%;margin-left: 1px;}
+#message_btn{height: 40px;text-align: right;line-height: 40px;border: none;padding-right: 10px;}
+
+.you_message,.my_message{height: auto;border-bottom: 1px solid #ddd;}
+.you_message_face{width: 40px;height: 40px;margin-top: 10px;margin-left: 10px;border-radius: 40px;float: left;}
+.you_message_face img{width: 100%;border-radius: 40px;}
+.you_message_text{float: left;margin-left: 10px;margin-top:30px;margin-bottom:20px;font-size: 12px;width: 400px;display:block;word-break: break-all;word-wrap: break-word;}
+.you_message_text span{background: #38c0ff;padding: 5px 10px;border-radius: 5px;color: #ffffff;display: block;}
+.my_message_face{width: 40px;height: 40px;float: right;border-radius: 40px;margin-right: 10px;margin-top: 10px;margin-bottom: 10px;}
+.my_message_face img{width: 100%;border-radius: 40px;}
+.my_message_text{float: right;font-size: 12px;margin-right: 10px;margin-top:30px;margin-bottom:20px;width: 400px;text-align: right;display:block;word-break: break-all;word-wrap: break-word;}
+.my_message_text span{background: #1b6609;padding: 5px 10px;border-radius: 5px;color: #ffffff;display: block;}

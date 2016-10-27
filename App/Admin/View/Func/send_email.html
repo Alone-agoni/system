@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        table{border: 1px solid #ddd;width: 100%; border-collapse: collapse;}
+        table td{padding:5px;border: 1px solid #ddd;}
+        table .td_right{text-align: right; width: 20%;}
+    </style>
+</head>
+<body>
+<div class="pageContent">
+    <form method="post" action="{:U('Func/send_email')}" class="pageForm required-validate" onsubmit="return validateCallback(this)">
+        <div class="pageFormContent nowrap" layoutH="60">
+            <table>
+                <tr>
+                    <td class="td_right">收件地址：</td>
+                    <td><input type="text" name="email" value="2517195653@qq.com" class="required"/></td>
+                </tr>
+                <tr>
+                    <td class="td_right">邮件标题：</td>
+                    <td><input type="text" name="title" value="邮件发送测试" class="required"/></td>
+                </tr>
+                <tr>
+                    <td class="td_right">邮件内容：</td>
+                    <td>
+                        <div class="unit">
+                            <script type="text/javascript">
+                                //实例化编辑器
+                                //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+                                var ue = UE.getEditor('editor{:time()}');
+                            </script>
+                            <script id="editor{:time()}" type="text/plain" style="width:1024px;height:500px;">
+                                <strong>xheditor + 文件上传</strong><br/>
+                                upLinkUrl:超链接上传接口地址<br/>
+                                upLinkExt:超链接本地上传扩展限制 【可选】【默认值： zip,rar,txt】<br/>
+                                upImgUrl:图片上传接口地址<br/>
+                                upImgExt:图片本地上传扩展限制 【可选】【默认值：jpg,jpeg,gif,png】<br/>
+                                upFlashUrl:动画上传接口地址<br/>
+                                upFlashExt:动画本地上传扩展限制 【可选】【默认值： swf】<br/>
+                                upMediaUrl:视频上传接口地址<br/>
+                                upMediaExt:视频本地上传扩展限制 【可选】【默认值： avi】
+                            </script>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+</div>
+</body>
+</html>

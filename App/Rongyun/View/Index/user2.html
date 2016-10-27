@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/style.css">
+    <script src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="http://cdn.ronghub.com/RongIMLib-2.0.6.beta.min.js"></script>
+    <script type="text/javascript" src="http://cdn.ronghub.com/RongEmoji-2.0.2.beta.min.js"></script>
+</head>
+<body>
+<div id="box">
+    <div id="box_top">
+        <div id="box_top_l">
+            <div id="my_face">
+                <img src="{$face}"/>
+            </div>
+            <div id="my_name">{$name}</div>
+            <div class="clear_float"></div>
+        </div>
+        <div id="box_top_r"><!-- admin2 --></div>
+    </div>
+
+    <div id="box_main">
+        <div id="box_main_l">
+            <h4>好友列表<small id="totalunreadcount"></small></h4>
+            <div id="friend_list">
+                <!--
+                <div class="fl-one fl-one-selected">
+                    <div class="fl_one_face">
+                        <img src="{$face}"/>
+                    </div>
+                    <div class="fl_one_name">
+                        {$name}
+                    </div>
+                    <div class="fl_one_count">
+                        +10
+                    </div>
+                    <div class="clear_float"></div>
+                </div>
+                <div class="fl-one">
+                    <div class="fl_one_face">
+                        <img src="{$face}"/>
+                    </div>
+                    <div class="fl_one_name">
+                        {$name}
+                    </div>
+                    <div class="fl_one_count">
+                        20
+                    </div>
+                    <div class="clear_float"></div>
+                </div>
+                <div class="fl-one">
+                    <div class="fl_one_face">
+                        <img src="{$face}"/>
+                    </div>
+                    <div class="fl_one_name">
+                        {$name}
+                    </div>
+                    <div class="fl_one_count">
+
+                    </div>
+                    <div class="clear_float"></div>
+                </div>
+                -->
+            </div>
+        </div>
+        <div id="box_main_r">
+            <div id="message_box">
+                <!--
+                <div class="you_message">
+                    <div class="you_message_face">
+                        <img src="{$face}"/>
+                    </div>
+                    <div class="you_message_text">
+                        你好
+                    </div>
+                    <div class="clear_float"></div>
+                </div>
+                <div class="my_message">
+                    <div class="my_message_face">
+                        <img src="{$face}"/>
+                    </div>
+                    <div class="my_message_text">
+                        你好
+                    </div>
+                    <div class="clear_float"></div>
+                </div>
+                <div class="you_message">
+                    <div class="you_message_face">
+                        <img src="{$face}"/>
+                    </div>
+                    <div class="you_message_text">
+                        你好
+                    </div>
+                    <div class="clear_float"></div>
+                </div>
+                <div class="my_message">
+                    <div class="my_message_face">
+                        <img src="{$face}"/>
+                    </div>
+                    <div class="my_message_text">
+                        你好
+                    </div>
+                    <div class="clear_float"></div>
+                </div>
+                <div class="you_message">
+                    <div class="you_message_face">
+                        <img src="{$face}"/>
+                    </div>
+                    <div class="you_message_text">
+                        你好
+                    </div>
+                    <div class="clear_float"></div>
+                </div>
+                <div class="my_message">
+                    <div class="my_message_face">
+                        <img src="{$face}"/>
+                    </div>
+                    <div class="my_message_text">
+                        你好
+                    </div>
+                    <div class="clear_float"></div>
+                </div>
+                <div class="you_message">
+                    <div class="you_message_face">
+                        <img src="{$face}"/>
+                    </div>
+                    <div class="you_message_text">
+                        你好
+                    </div>
+                    <div class="clear_float"></div>
+                </div>
+                <div class="my_message">
+                    <div class="my_message_face">
+                        <img src="{$face}"/>
+                    </div>
+                    <div class="my_message_text">
+                        你好
+                    </div>
+                    <div class="clear_float"></div>
+                </div>
+                <div class="you_message">
+                    <div class="you_message_face">
+                        <img src="{$face}"/>
+                    </div>
+                    <div class="you_message_text">
+                        你好
+                    </div>
+                    <div class="clear_float"></div>
+                </div>
+                <div class="my_message">
+                    <div class="my_message_face">
+                        <img src="{$face}"/>
+                    </div>
+                    <div class="my_message_text">
+                        你好
+                    </div>
+                    <div class="clear_float"></div>
+                </div>
+                -->
+            </div>
+            <div id="message_area">
+                <input type="text" name="content" id="content" value="">
+            </div>
+            <div id="message_btn">
+                <input type="button" id="send_message" value="发送">
+            </div>
+        </div>
+        <div class="clear_float"></div>
+    </div>
+</div>
+<script type="text/javascript">
+    //定义变量
+    var xbIsLogin=1,
+            rongUserInfoUrl="{:U('Rongyun/get_user_info')}",
+            rongKey="{$rong_key}",
+            rongToken="{$rong_token}",
+            xbUserInfo = {
+                id: "{$uid}",
+                name: "{$name}",
+                face: "{$face}"
+            };
+</script>
+<script type="text/javascript" src="__PUBLIC__/js/rongyun.js"></script>
+</body>
+</html>

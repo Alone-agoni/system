@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2016-10-24 11:24:27
+-- Generation Time: 2016-10-27 07:48:22
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -39,9 +39,9 @@ CREATE TABLE IF NOT EXISTS `think_auth_group` (
 --
 
 INSERT INTO `think_auth_group` (`id`, `title`, `status`, `rules`) VALUES
-(1, '超级管理员', 1, '6,20,1,3,4,5,132,133,143,144,21,7,8,9,10,134,135,136,137,11,12,13,14,15,138,139,140,19,129,130,131,141,142,104,105'),
+(1, '超级管理员', 1, '6,147,148,20,1,3,4,5,132,133,143,144,21,7,8,9,10,134,135,136,137,11,12,13,14,15,138,139,140,19,129,130,131,141,142,104,105,145,146,149,150,151,152,153,154,155,156'),
 (2, '产品管理员', 1, '6,20,1,3,4,5,132,133,143,144'),
-(4, '文章编辑', 1, '6,104,105');
+(4, '文章编辑', 1, '6,104,105,145,146');
 
 -- --------------------------------------------------------
 
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `think_auth_rule` (
   `condition` char(100) NOT NULL DEFAULT '' COMMENT '规则表达式，为空表示存在就验证，不为空表示按照条件验证',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='规则表' AUTO_INCREMENT=145 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='规则表' AUTO_INCREMENT=157 ;
 
 --
 -- 转存表中的数据 `think_auth_rule`
@@ -123,7 +123,19 @@ INSERT INTO `think_auth_rule` (`id`, `pid`, `name`, `title`, `status`, `type`, `
 (135, 7, 'Admin/AuthRule/update', '修改权限', 1, 1, ''),
 (131, 19, 'Admin/User/destory', '删除管理员', 1, 1, ''),
 (130, 19, 'Admin/User/edit', '修改管理员视图', 1, 1, ''),
-(129, 19, 'Admin/User/create', '添加管理员视图', 1, 1, '');
+(129, 19, 'Admin/User/create', '添加管理员视图', 1, 1, ''),
+(145, 0, '4', '功能整合', 1, 1, ''),
+(146, 145, 'Admin/Func/qrcode', '生成二维码', 1, 1, ''),
+(147, 6, 'Admin/Index/create_model', '自动创建模型', 1, 1, ''),
+(148, 6, 'Admin/Index/create_controller', '创建控制器视图', 1, 1, ''),
+(149, 145, 'Admin/Func/export_excel', '导入导出Excel、Csv', 1, 1, ''),
+(150, 149, 'Admin/Func/export_xls', '导出Excel', 1, 1, ''),
+(151, 149, 'Admin/Func/export_csv', '导出Csv', 1, 1, ''),
+(152, 149, 'Admin/Func/import_xls', '导入Excel', 1, 1, ''),
+(153, 149, 'Admin/Func/import_csv', '导入csv', 1, 1, ''),
+(154, 145, 'Admin/Func/pdf', '生成pdf', 1, 1, ''),
+(155, 145, 'Admin/Func/send_email', '发送邮件', 1, 1, ''),
+(156, 145, 'Admin/Func/geetest_check', '滑动验证码', 1, 1, '');
 
 -- --------------------------------------------------------
 
@@ -138,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `think_log` (
   `logintime` varchar(10) NOT NULL,
   `loginip` varchar(15) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='登录日志' AUTO_INCREMENT=31 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='登录日志' AUTO_INCREMENT=37 ;
 
 --
 -- 转存表中的数据 `think_log`
@@ -174,7 +186,13 @@ INSERT INTO `think_log` (`id`, `userid`, `username`, `logintime`, `loginip`) VAL
 (27, 7, 'admin', '1477295163', '127.0.0.1'),
 (28, 1, 'only', '1477295295', '127.0.0.1'),
 (29, 7, 'admin', '1477296077', '127.0.0.1'),
-(30, 1, 'only', '1477296239', '127.0.0.1');
+(30, 1, 'only', '1477296239', '127.0.0.1'),
+(31, 8, 'editor', '1477315368', '127.0.0.1'),
+(32, 1, 'only', '1477315394', '127.0.0.1'),
+(33, 1, 'only', '1477368530', '127.0.0.1'),
+(34, 1, 'only', '1477382747', '127.0.0.1'),
+(35, 1, 'only', '1477449425', '127.0.0.1'),
+(36, 1, 'only', '1477546666', '127.0.0.1');
 
 -- --------------------------------------------------------
 
@@ -189,7 +207,7 @@ CREATE TABLE IF NOT EXISTS `think_menu` (
   `mca` varchar(255) NOT NULL,
   `sort` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='菜单' AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='菜单' AUTO_INCREMENT=15 ;
 
 --
 -- 转存表中的数据 `think_menu`
@@ -203,7 +221,37 @@ INSERT INTO `think_menu` (`id`, `pid`, `name`, `mca`, `sort`) VALUES
 (5, 2, '权限管理', 'Admin/AuthRule/index', 1),
 (6, 2, '用户组管理', 'Admin/AuthGroup/index', 2),
 (7, 2, '管理员列表', 'Admin/User/index', 3),
-(8, 3, '文章列表', 'Admin/Article/index', 1);
+(8, 3, '文章列表', 'Admin/Article/index', 1),
+(9, 0, '功能整合', '4', 0),
+(10, 9, '生成二维码', 'Admin/Func/qrcode', 1),
+(11, 9, '导入导出Excel、Csv', 'Admin/Func/export_excel', 2),
+(12, 9, '生成Pdf', 'Admin/Func/pdf', 3),
+(13, 9, '发送邮件', 'Admin/Func/send_email', 4),
+(14, 9, '滑动验证码', 'Admin/Func/geetest_check', 5);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_rongyun_user`
+--
+
+CREATE TABLE IF NOT EXISTS `think_rongyun_user` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(60) NOT NULL DEFAULT '' COMMENT '用户名',
+  `password` varchar(64) NOT NULL DEFAULT '' COMMENT '登录密码；mb_password加密',
+  `face` varchar(255) NOT NULL DEFAULT '' COMMENT '用户头像，相对于upload/avatar目录',
+  `access_token` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_login_key` (`name`) USING BTREE
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=90 ;
+
+--
+-- 转存表中的数据 `think_rongyun_user`
+--
+
+INSERT INTO `think_rongyun_user` (`id`, `name`, `password`, `face`, `access_token`) VALUES
+(88, 'admin', 'e10adc3949ba59abbe56e057f20f883e', '/Uploads/face/user1.jpg', 'xKX+KpWmnQv9thlk5DW7cyQmKe0yMO+J4U8bCkk5syr0+u7ZUQaW2RkQuljH0YuC7+IEQhInCd6yjyGI3e3g6w=='),
+(89, 'admin2', 'e10adc3949ba59abbe56e057f20f883e', '/Uploads/face/user2.jpg', 'EgdHN0UKGWeIQQjcXoClMiQmKe0yMO+J4U8bCkk5syr0+u7ZUQaW2Q/uXCbiZp5yAAUQwqJ6yy2yjyGI3e3g6w==');
 
 -- --------------------------------------------------------
 
@@ -226,9 +274,9 @@ CREATE TABLE IF NOT EXISTS `think_user` (
 --
 
 INSERT INTO `think_user` (`id`, `username`, `password`, `status`, `logintime`, `loginip`) VALUES
-(1, 'only', 'f379eaf3c831b04de153469d1bec345e', 1, '1477296239', '1270.0.01'),
+(1, 'only', 'f379eaf3c831b04de153469d1bec345e', 1, '1477546666', '1270.0.01'),
 (7, 'admin', 'f379eaf3c831b04de153469d1bec345e', 1, '1477296077', ''),
-(8, 'editor', 'f379eaf3c831b04de153469d1bec345e', 1, '', '');
+(8, 'editor', 'f379eaf3c831b04de153469d1bec345e', 1, '1477315368', '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
